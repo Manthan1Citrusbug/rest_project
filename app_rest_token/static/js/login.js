@@ -12,7 +12,7 @@ function verify_data(event){
         url:'../custom_token/',
         type: "POST",
         headers: {'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value},
-        data: {data: JSON.stringify(post_data)},
+        data: post_data,
         success: function (res) {
             if (res.status){
                 console.log(res)
