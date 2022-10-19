@@ -1,9 +1,8 @@
+from functools import partial
 from django.shortcuts import render
-import random, json, io
+import random
 from app_ser_insert.serializers import StudentSerializer
 from .models import Student
-from rest_framework.renderers import JSONRenderer
-from rest_framework.parsers import JSONParser
 from django.http import HttpResponse, JsonResponse
 
 # Create your views here.
@@ -11,7 +10,7 @@ from django.http import HttpResponse, JsonResponse
 
 # Single Student data(Model Object)
 
-def student_insert():
+def student_insert(request):
     
     name = ['Raj','Rani','Rahul','Hemang','Parth','Kaushik','Keyur']
     city = ['Ahmedabad','Surat','vapi','Mumbai','Rajkot','Vadodara']
@@ -44,16 +43,18 @@ def student_insert():
     return JsonResponse(res, safe=False)
 
 
-def student_update():
-    # CREATING DATA FOR INSERT INTO SERIALIZERS
+def student_update(request):
+    # CREATING DATA FOR UPDATE INTO SERIALIZERS
     data = {
+        'id':1,
         'name':'Hemang',
-        'roll':102,
+        'roll':'102',
         'city':'Surat'
     }
 
+    instance_data = Student.objects.get(id=data['id'])
     # .save() WILL UPDATE THE EXISTING 'Student' instance 
-    serializer = StudentSerializer(Student, data=data)
+    serializer = StudentSerializer(instance_data, data=data, partial=True)
 
     if serializer.is_valid():
         print(serializer.validated_data)
@@ -68,3 +69,15 @@ def student_update():
     
     res = {'status':False, 'msg':serializer.errors}
     return JsonResponse(res, safe=False)
+
+def student_delete(request):
+    # CREATING DATA FOR DELETE INTO SERIALIZERS
+    data = { 'id' : 5 }
+
+    try:
+        instance_data = Student.objects.get(id=data['id'])
+        res = instance_data.delete()
+        res = {'status':True, 'msg':'DATA DELETED!!'}
+        return JsonResponse(res, safe=False)
+    except:
+        return JsonResponse({'res':'Something Went Wrong'}, safe=False)

@@ -16,8 +16,11 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path,include
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('view/', include('app_ser_view.urls'),name='view_ser'),
     path('insert/', include('app_ser_insert.urls'),name='insert_ser'),
+    path('token-auth/', include('app_rest_token.urls'),name='rest_token'),
+
 ]

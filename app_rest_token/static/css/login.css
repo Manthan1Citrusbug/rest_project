@@ -1,0 +1,58 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color: #fff;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container-main{
+    min-height: 70vh;
+    width: 20%;
+    max-width: 500px !important;
+    min-width: 300px !important;
+    margin: 15vh;
+}
+
+.form-container{
+    width:100%;
+    margin: auto;
+}
+.title{
+    margin: 0px !important;
+    padding: auto;
+    text-align: center;
+}
+.title h4{
+    margin: auto;
+    height: 100%;
+    font-size: 28px;
+    font-family: 'Paytone One', sans-serif;
+}
+
+
+
+.name_feild{
+    display: inline-block;
+    width: auto;
+
+}
+
+input{
+    display: inline-block;
+    width: 80%;
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.other_feild{
+    display: block;
+    margin: 10px;
+}
+
+.other_feild label{
+    font-family: 'Poppins', sans-serif;
+    font-size: 500;
+    font-display: bold;
+    width: 20%;
+}
